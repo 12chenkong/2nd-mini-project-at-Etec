@@ -1,13 +1,14 @@
 package java_collection.Mini_project;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
-
+// Here is the place where we implement  every method
 public class EmployeeImplement {
     Scanner scanner=new Scanner(System.in);
     List<Employee>employeeList=new ArrayList<>();
-
+    public EmployeeImplement(){}
     //inserting employee to the list
     public void addEmployee(){
         System.out.println("Enter number of employee:");
@@ -57,23 +58,21 @@ public class EmployeeImplement {
 
     }
     //Delete employee based on entered ID
-    public Employee deleteEmp(){
+    public void deleteEmp(){
         System.out.println("Enter id to remove employee: ");
-        Employee removeEmployee=null;
         int removeId=scanner.nextInt();
+        boolean status=false;
         for(int i=0;i<employeeList.size();i++){
             if(employeeList.get(i).getId()==removeId){
-                removeEmployee=new Employee(
-                        employeeList.get(i).getId(),
-                        employeeList.get(i).getName(),
-                        employeeList.get(i).getSalary(),
-                        employeeList.get(i).getAge()
-                        );
                 employeeList.remove(i);
+                status=true;
                 break;
             }
         }
-        return removeEmployee;
+        if(status){
+            System.out.println("Delete successfully");
+        }else
+            System.out.println("ID not found in the system!!");
     }
     //Update employee's info based entered id
     public  void update(){
@@ -100,8 +99,16 @@ public class EmployeeImplement {
             System.out.println("ID not found in the list");
         }
     }
-
+    // Sorting employee object base on give ID
+ public void sort(){
+        employeeList.sort(new SortById());
+        for (Employee i:employeeList){
+            System.out.println(i);
+        }
+ }
 }
+
+
 
 
 
